@@ -1,1 +1,42 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend-app
+  name: frontend-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-app-krishna
+  template:
+    metadata:
+      labels:
+        app: frontend-app-krishna
+    spec:
+      containers:
+      - name: my-frontend-app-krishna
+        image: 490167669940.dkr.ecr.ap-southeast-1.amazonaws.com/eks-frontend-app-deployment:frontend-34
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8085
+          name: http
+          protocol: TCP
+# service type loadbalancer       
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: frontend-app-krishna
+    k8s-app: frontend-app-krishna
+  name: frontend-app-krishna
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8085
+  type: LoadBalancer
+  selector:
+    app: frontend-app-krishna
