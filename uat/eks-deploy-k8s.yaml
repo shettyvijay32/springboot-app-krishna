@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: my-springbootapp-vj
-        image: 490167669940.dkr.ecr.ap-southeast-1.amazonaws.com/eks-frontend-app-deployment:frontend-34
+        image: 490167669940.dkr.ecr.ap-southeast-1.amazonaws.com/eks-frontend-app-deployment:frontend-341
         imagePullPolicy: Always
         ports:
         - containerPort: 8085
