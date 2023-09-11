@@ -4,6 +4,7 @@ metadata:
   labels:
     app: springbootapp
   name: springbootapp
+  namespace: springbootapp
 spec:
   replicas: 1
   selector:
@@ -31,6 +32,7 @@ metadata:
     app: springbootapp-vj
     k8s-app: springbootapp-vj
   name: springbootapp-vj
+  namespace: springbootapp
 spec:
   ports:
   - name: http
