@@ -8,6 +8,7 @@ pipeline {
         AWS_DEFAULT_REGION = 'ap-southeast-1'
         EKS_CLUSTER_NAME = 'sandboxeks1'
         SONAR_LOGIN = credentials('Sonar-Creds')
+        DOCKERHUB_CREDENTIALS = credentials('docker-rama')
     }
     stages {
         stage('Checkout') {
@@ -24,7 +25,7 @@ pipeline {
             steps {
                 sh "mvn clean verify sonar:sonar  \
             -Dsonar.projectKey=frontend \
-            -Dsonar.host.url=http://18.136.72.199:9000/ \
+            -Dsonar.host.url=http:182.18.184.80:9000 \
             -Dsonar.login=sqa_50885d4939be4dfc296b4d5af73a7c307287fec8"
             }
         }
@@ -40,17 +41,21 @@ pipeline {
                
         stage('Build Image') {
             steps {
-                sh 'docker build -t frontendapp-${app} .'
+                sh 'docker build -t frontendapp-${app}:latest .'
             }
         }
-        stage('Push to ECR') {
+        stage('Login') {
             steps {
-                sh 'aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 490167669940.dkr.ecr.ap-southeast-1.amazonaws.com'
-                sh "docker tag frontendapp-${app}:latest  490167669940.dkr.ecr.ap-southeast-1.amazonaws.com/eks-frontend-app-deployment:${app}-${BUILD_NUMBER}"
-                sh "docker push harishbabugunda/frontendapp:${app}-${BUILD_NUMBER}"
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+           }
+        }
+        stage('Push to DOCKER') {
+            steps {
+                sh 'docker tag frontendapp-${app} ramakrishna8254/week:v5'
+                sh 'docker push ramakrishna8254/week:v5'
             }
         }
-        stage('Deploying ECR Image to EKS') {
+        stage('Deploying Docker Image to EKS') {
             steps {
                 script {
                     sh '''
