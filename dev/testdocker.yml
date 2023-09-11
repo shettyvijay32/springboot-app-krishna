@@ -32,4 +32,4 @@ spec:
     targetPort: 8085
   selector:
     app: busybox-test
-  type: LoadBalancer
+  type: ClusterIP
