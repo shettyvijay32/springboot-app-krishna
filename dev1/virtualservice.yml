@@ -42,7 +42,7 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     alb.ingress.kubernetes.io/scheme: internet-facing
-  name: istio-hellow-alb
+  name: istio-frb-alb
   namespace: istio-system
 spec:
   ingressClassName: alb  
