@@ -5,7 +5,7 @@ metadata:
   namespace: testapp
 spec:
   hosts:
-  - cloudautomate.in
+  - testapp.cloudautomate.in
   gateways:
   - testapp-internal
   http:
