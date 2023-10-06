@@ -57,7 +57,6 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: prometehus-vs
-  namespace: istio-system
 spec:
   hosts:
   - prometheus.cloudautomate.in
@@ -70,14 +69,12 @@ spec:
     route:
     - destination:
         host: prometheus.istio-system.svc.cluster.local
-        port:
-          number: 9090
+        
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: grafana-vs 
-  namespace: istio-system
 spec:
   hosts:
   - grafana.cloudautomate.in
@@ -90,8 +87,7 @@ spec:
     route:
     - destination:
         host: grafana.istio-system.svc.cluster.local
-        port:
-          number: 3000
+      
      
         
         
