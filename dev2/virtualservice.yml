@@ -42,8 +42,7 @@ metadata:
   namespace: istio-system
 spec:
   ingressClassName: alb  
-  rules:
-  
+  rules:  
   - http:
       paths:
       - backend:
@@ -82,7 +81,7 @@ spec:
   hosts:
   - grafana.cloudautomate.in
   gateways:
-  - cloud-gateway
+  - cloud-gateway-new
   http:
   - match:    
     - uri:
