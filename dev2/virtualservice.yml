@@ -14,8 +14,6 @@ spec:
     route:
     - destination:
         host: chatapp.chatapp.svc.cluster.local
-        port:
-          number: 8080
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
