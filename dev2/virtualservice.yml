@@ -13,7 +13,7 @@ spec:
         prefix: /
     route:
     - destination:
-        host: hello-world
+        host: chatapp.chatapp.svc.cluster.local
         port:
           number: 8080
 ---
